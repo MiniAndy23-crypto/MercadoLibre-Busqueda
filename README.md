@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
@@ -144,10 +145,10 @@
             Ecosistema: Camping en Patagonia
         </div>
 
-        <!-- 3. CAPA ESPACIAL (Hotspots) -->
+        <!-- 3. CAPA ESPACIAL (Hotspots para Desktop) -->
         
-        <!-- Carpa (Abajo Izquierda) -->
-        <div class="absolute bottom-[35%] left-[15%] z-10 flex flex-col items-center group cursor-pointer animate-float hotspot" data-id="carpa">
+        <!-- Carpa (Izquierda) -->
+        <div class="absolute bottom-[20%] left-[25%] z-10 flex flex-col items-center group cursor-pointer animate-float hotspot" data-id="carpa">
             <div class="w-14 h-14 rounded-full bg-ml-yellow/90 backdrop-blur-md flex items-center justify-center border-2 border-white shadow-[0_0_20px_rgba(255,230,0,0.6)] transition-transform duration-300 group-hover:scale-110">
                 <i class="ph-fill ph-tent text-ml-dark text-3xl"></i>
             </div>
@@ -157,8 +158,8 @@
             </div>
         </div>
 
-        <!-- Zapatillas (Centro Derecha) -->
-        <div class="absolute bottom-[25%] right-[30%] z-10 flex flex-col items-center group cursor-pointer animate-float hotspot" style="animation-delay: 1s;" data-id="botas">
+        <!-- Zapatillas (Centro Abajo) -->
+        <div class="absolute bottom-[15%] right-[45%] z-10 flex flex-col items-center group cursor-pointer animate-float hotspot" style="animation-delay: 1s;" data-id="botas">
             <div class="w-14 h-14 rounded-full bg-white/50 backdrop-blur-md flex items-center justify-center border-2 border-white shadow-[0_0_15px_rgba(255,255,255,0.4)] transition-all duration-300 group-hover:scale-110 group-hover:bg-ml-yellow/90 group-hover:border-ml-yellow">
                 <i class="ph-fill ph-sneaker text-white group-hover:text-ml-dark text-3xl transition-colors"></i>
             </div>
@@ -168,8 +169,8 @@
             </div>
         </div>
 
-        <!-- Arnés (Medio Derecha Alta) -->
-        <div class="absolute top-[35%] right-[20%] z-10 flex flex-col items-center group cursor-pointer animate-float hotspot" style="animation-delay: 2s;" data-id="arnes">
+        <!-- Arnés (Centro Arriba) -->
+        <div class="absolute top-[40%] right-[35%] z-10 flex flex-col items-center group cursor-pointer animate-float hotspot" style="animation-delay: 2s;" data-id="arnes">
             <div class="w-14 h-14 rounded-full bg-white/50 backdrop-blur-md flex items-center justify-center border-2 border-white shadow-[0_0_15px_rgba(255,255,255,0.4)] transition-all duration-300 group-hover:scale-110 group-hover:bg-ml-yellow/90 group-hover:border-ml-yellow">
                 <i class="ph-fill ph-dog text-white group-hover:text-ml-dark text-3xl transition-colors"></i>
             </div>
@@ -179,29 +180,57 @@
             </div>
         </div>
 
-        <!-- 4. COMBO AVENTURA (Panel Inferior) -->
-        <div class="absolute bottom-6 left-1/2 transform -translate-x-1/2 w-11/12 max-w-2xl z-30 glass-combo rounded-2xl p-4 flex items-center justify-between transition-transform duration-500 hover:-translate-y-1" id="combo-panel">
-            <div class="flex items-center gap-4">
-                <!-- Stack de miniaturas -->
-                <div class="flex -space-x-3">
-                    <img src="./image_3.png" class="w-12 h-12 rounded-full border-2 border-white object-cover bg-white" alt="Carpa">
-                    <img src="./image.png" class="w-12 h-12 rounded-full border-2 border-white object-cover bg-white" alt="Zapatillas">
-                    <img src="./image_2.png" class="w-12 h-12 rounded-full border-2 border-white object-cover bg-white" alt="Arnés">
+        <!-- 4. COMBO AVENTURA (Panel Lateral Derecho - Optimizado Desktop) -->
+        <div class="absolute top-6 right-6 bottom-6 w-80 lg:w-96 z-30 glass-combo rounded-2xl p-6 flex flex-col justify-between transition-all duration-500 shadow-2xl" id="combo-panel">
+            <div>
+                <div class="flex items-center justify-between mb-6">
+                    <div>
+                        <h3 class="text-gray-800 text-2xl font-bold leading-tight">Combo Aventura</h3>
+                        <p class="text-ml-green text-sm font-semibold">Lleva el escenario completo</p>
+                    </div>
+                    <i class="ph-fill ph-sparkle text-ml-blue text-3xl"></i>
                 </div>
-                <div class="hidden sm:block">
-                    <h3 class="text-gray-800 font-bold leading-tight">Combo Aventura</h3>
-                    <p class="text-ml-green text-xs font-semibold">Lleva el escenario completo</p>
+                
+                <div class="flex flex-col gap-4">
+                    <!-- Item 1 -->
+                    <div class="flex items-center gap-4 bg-white/50 p-2.5 rounded-xl border border-white/50 hover:bg-white/80 transition-colors">
+                        <img src="https://images.unsplash.com/photo-1523987355523-c7b5b0dd90a7?auto=format&fit=crop&w=100&q=80" class="w-16 h-16 rounded-lg object-cover shadow-sm" alt="Carpa">
+                        <div class="flex-1">
+                            <p class="text-sm font-bold text-gray-800 leading-tight">Carpa Glamping</p>
+                            <p class="text-sm text-gray-600 font-medium">$ 145.900</p>
+                        </div>
+                    </div>
+                    <!-- Item 2 -->
+                    <div class="flex items-center gap-4 bg-white/50 p-2.5 rounded-xl border border-white/50 hover:bg-white/80 transition-colors">
+                        <img src="https://images.unsplash.com/photo-1549298916-b41d501d3772?auto=format&fit=crop&w=100&q=80" class="w-16 h-16 rounded-lg object-cover shadow-sm" alt="Zapatillas">
+                        <div class="flex-1">
+                            <p class="text-sm font-bold text-gray-800 leading-tight">Salomon XT</p>
+                            <p class="text-sm text-gray-600 font-medium">$ 85.000</p>
+                        </div>
+                    </div>
+                    <!-- Item 3 -->
+                    <div class="flex items-center gap-4 bg-white/50 p-2.5 rounded-xl border border-white/50 hover:bg-white/80 transition-colors">
+                        <img src="https://images.unsplash.com/photo-1522851412497-a640ce1c7a5f?auto=format&fit=crop&w=100&q=80" class="w-16 h-16 rounded-lg object-cover shadow-sm" alt="Arnés">
+                        <div class="flex-1">
+                            <p class="text-sm font-bold text-gray-800 leading-tight">Arnés Táctico</p>
+                            <p class="text-sm text-gray-600 font-medium">$ 25.000</p>
+                        </div>
+                    </div>
                 </div>
             </div>
             
-            <div class="flex items-center gap-6">
-                <div class="text-right">
-                    <p class="text-gray-400 line-through text-sm">$ 255.900</p>
-                    <p class="text-gray-900 font-bold text-xl">$ 219.900 <span class="text-ml-green text-sm font-bold">15% OFF</span></p>
+            <div class="mt-6 pt-5 border-t border-gray-300/50">
+                <div class="flex justify-between items-end mb-5">
+                    <p class="text-gray-600 font-medium pb-1">Total:</p>
+                    <div class="text-right">
+                        <p class="text-gray-400 line-through text-sm">$ 255.900</p>
+                        <p class="text-gray-900 font-bold text-3xl">$ 219.900</p>
+                        <p class="text-ml-green text-sm font-bold mt-0.5">15% OFF</p>
+                    </div>
                 </div>
-                <button class="bg-ml-blue hover:bg-blue-600 text-white font-semibold py-2 px-6 rounded-full transition-colors shadow-md flex items-center gap-2 whitespace-nowrap">
-                    Comprar combo
-                    <i class="ph-bold ph-arrow-right"></i>
+                <button class="w-full bg-ml-blue hover:bg-blue-600 text-white font-semibold py-3.5 px-6 rounded-xl transition-colors shadow-lg hover:shadow-xl flex items-center justify-center gap-2 text-lg">
+                    Comprar Escenario
+                    <i class="ph-bold ph-shopping-cart"></i>
                 </button>
             </div>
         </div>
@@ -257,26 +286,26 @@
 
     <!-- LÓGICA JAVASCRIPT -->
     <script>
-        // Integrando las imágenes locales provistas por el usuario
+        // Integrando las imágenes estables de Unsplash para ordenador
         const productsData = {
             'carpa': {
                 title: 'Carpa Glamping Familiar Verde Exterior',
                 price: '$ 145.900',
-                img: './image_3.png',
+                img: 'https://images.unsplash.com/photo-1523987355523-c7b5b0dd90a7?auto=format&fit=crop&w=600&q=80',
                 desc: 'Carpa espaciosa ideal para glamping. Cuenta con ventanas amplias para ventilación, base impermeable y espacio suficiente para sillas y colchones.',
                 category: 'Deportes y Fitness > Camping'
             },
             'botas': {
                 title: 'Zapatillas Salomon XT Pathway',
                 price: '$ 85.000',
-                img: './image.png',
+                img: 'https://images.unsplash.com/photo-1549298916-b41d501d3772?auto=format&fit=crop&w=600&q=80',
                 desc: 'Zapatillas de trail running con diseño ligero y robusto. Sistema Quicklace para un ajuste perfecto y suela Contagrip para tracción en terrenos difíciles.',
                 category: 'Ropa y Accesorios > Calzado Deportivo'
             },
             'arnes': {
                 title: 'Arnés Táctico Para Perro + Correa',
                 price: '$ 25.000',
-                img: './image_2.png',
+                img: 'https://images.unsplash.com/photo-1522851412497-a640ce1c7a5f?auto=format&fit=crop&w=600&q=80',
                 desc: 'Conjunto de arnés, collar táctico y correa elástica. Equipado con hebillas de metal resistente, sistema MOLLE y panel de gancho y bucle.',
                 category: 'Animales y Mascotas > Perros'
             }
@@ -310,7 +339,7 @@
                 modCategory.textContent = data.category;
                 
                 bgScene.classList.add('scene-blurred');
-                comboPanel.classList.add('translate-y-32', 'opacity-0'); // Ocultar combo
+                comboPanel.classList.add('translate-x-[120%]', 'opacity-0'); // Ocultar combo hacia la derecha
                 
                 hotspots.forEach(h => h.classList.add('opacity-0', 'pointer-events-none'));
 
@@ -339,7 +368,7 @@
             hotspots.forEach(h => {
                 h.classList.remove('opacity-0', 'pointer-events-none');
             });
-            comboPanel.classList.remove('translate-y-32', 'opacity-0');
+            comboPanel.classList.remove('translate-x-[120%]', 'opacity-0');
         });
 
         const container = document.getElementById('bg-scene-container');

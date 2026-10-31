@@ -14,7 +14,7 @@
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-    <!-- Configuración de Tailwind para incluir el amarillo de Mercado Libre -->
+    <!-- Configuración de Tailwind -->
     <script>
         tailwind.config = {
             theme: {
@@ -24,9 +24,10 @@
                     },
                     colors: {
                         ml: {
-                            yellow: '#FFF159',
+                            yellow: '#ffe600',
                             blue: '#3483FA',
-                            dark: '#333333'
+                            dark: '#333333',
+                            green: '#00a650'
                         }
                     },
                     animation: {
@@ -45,7 +46,7 @@
     </script>
 
     <style>
-        /* Estilos personalizados para Glassmorphism y animaciones fluidas */
+        /* Estilos personalizados para Glassmorphism */
         .glass-panel {
             background: rgba(255, 255, 255, 0.15);
             backdrop-filter: blur(12px);
@@ -55,139 +56,199 @@
         }
 
         .glass-panel-dark {
-            background: rgba(0, 0, 0, 0.4);
+            background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.3);
+        }
+
+        .glass-combo {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 -4px 30px rgba(0, 0, 0, 0.15);
         }
 
         /* Transición suave para el fondo inmersivo */
+        #bg-scene-container {
+            perspective: 1000px;
+        }
+
         #bg-scene {
-            transition: filter 0.8s ease-in-out, transform 0.8s ease-in-out;
+            transition: filter 0.8s ease-in-out, transform 0.1s ease-out;
+            will-change: transform, filter;
         }
 
         .scene-blurred {
-            filter: blur(15px) brightness(0.6);
-            transform: scale(1.05); /* Ligero zoom in para dar efecto de profundidad 3D */
+            filter: blur(20px) brightness(0.6);
         }
 
-        /* Ocultar barra de desplazamiento */
         ::-webkit-scrollbar {
             width: 0px;
         }
     </style>
 </head>
-<body class="bg-gray-900 text-white overflow-hidden w-full h-screen font-sans selection:bg-ml-yellow selection:text-black">
+<body class="bg-gray-100 text-ml-dark overflow-hidden w-full h-screen font-sans selection:bg-ml-blue selection:text-white">
 
-    <!-- 1. ESCENARIO VIVO (Fondo Inmersivo) -->
-    <!-- Imagen de alta calidad de la Patagonia -->
-    <div id="bg-scene" class="absolute inset-0 w-full h-full bg-cover bg-center object-cover origin-center" 
-         style="background-image: url('https://images.unsplash.com/photo-1510312305653-8ed496efae75?q=80&w=2574&auto=format&fit=crop');">
-    </div>
+    <!-- 1. HEADER MERCADO LIBRE -->
+    <header class="fixed top-0 left-0 w-full bg-ml-yellow z-40 h-16 flex items-center justify-between px-4 shadow-sm">
+        <a href="#" class="flex-shrink-0 flex items-center hidden md:flex">
+            <img src="https://http2.mlstatic.com/frontend-assets/ml-web-navigation/ui-navigation/5.21.22/mercadolibre/logo__small@2x.png" alt="Mercado Libre" class="h-8 object-contain">
+        </a>
+        <a href="#" class="flex-shrink-0 flex items-center md:hidden">
+            <img src="https://http2.mlstatic.com/frontend-assets/ml-web-navigation/ui-navigation/5.21.22/mercadolibre/logo__small@2x.png" alt="ML" class="h-8 object-contain w-12 overflow-hidden object-left">
+        </a>
 
-    <!-- Gradiente sutil superior para legibilidad de la barra de búsqueda -->
-    <div class="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/20 pointer-events-none transition-opacity duration-500" id="ambient-overlay"></div>
-
-    <!-- 2. INTERFAZ DE BÚSQUEDA (El "Prompt") -->
-    <header class="absolute top-6 left-1/2 -translate-x-1/2 w-11/12 max-w-3xl z-20 flex flex-col items-center gap-2 transition-all duration-500" id="search-header">
-        <div class="glass-panel w-full rounded-full flex items-center px-6 py-3 transition-transform hover:scale-[1.01]">
-            <i class="ph ph-sparkle text-ml-yellow text-2xl mr-3"></i>
-            <input type="text" 
-                   value="Voy a acampar a la Patagonia con mi perro" 
-                   class="bg-transparent border-none outline-none text-white w-full text-lg placeholder-white/70 font-medium"
-                   readonly>
-            <div class="flex items-center gap-4 ml-4 border-l border-white/20 pl-4">
-                <button class="text-white hover:text-ml-yellow transition-colors"><i class="ph ph-microphone text-2xl"></i></button>
-                <button class="bg-ml-yellow text-ml-dark p-2 rounded-full hover:bg-yellow-400 transition-colors shadow-lg"><i class="ph ph-magnifying-glass text-xl"></i></button>
+        <!-- Barra de Búsqueda Inmersiva -->
+        <div class="flex-1 max-w-3xl mx-4 lg:mx-8 transition-all duration-500" id="search-header">
+            <div class="bg-white rounded-full flex items-center px-4 py-2 shadow-md hover:shadow-lg transition-shadow border border-transparent focus-within:border-ml-blue">
+                <i class="ph-fill ph-sparkle text-ml-blue text-xl mr-2 animate-pulse"></i>
+                <input type="text" 
+                       value="Voy a acampar a la Patagonia con mi perro..." 
+                       class="bg-transparent border-none outline-none text-ml-dark w-full text-sm md:text-base font-medium truncate placeholder-gray-400"
+                       readonly>
+                <div class="flex items-center gap-3 ml-2 border-l border-gray-200 pl-3">
+                    <button class="text-gray-400 hover:text-ml-blue transition-colors" title="Búsqueda por voz"><i class="ph ph-microphone text-xl md:text-2xl"></i></button>
+                    <button class="text-gray-400 hover:text-ml-blue transition-colors hidden sm:block" title="Búsqueda por imagen"><i class="ph ph-camera text-xl md:text-2xl"></i></button>
+                    <button class="bg-gray-100 text-gray-600 p-1.5 md:p-2 rounded-full hover:bg-ml-blue hover:text-white transition-colors"><i class="ph ph-magnifying-glass text-lg md:text-xl"></i></button>
+                </div>
             </div>
         </div>
-        <span class="text-xs text-white/70 bg-black/30 px-3 py-1 rounded-full backdrop-blur-sm">Generando Ecosistema 3D...</span>
+
+        <div class="flex items-center gap-4 text-ml-dark text-sm">
+            <a href="#" class="hidden lg:block hover:text-black transition-colors font-medium">Mis compras</a>
+            <a href="#" class="hidden lg:block hover:text-black transition-colors font-medium">Favoritos</a>
+            <button class="hover:text-black transition-colors relative">
+                <i class="ph ph-bell text-2xl"></i>
+                <span class="absolute top-0 right-0 w-2.5 h-2.5 bg-red-500 rounded-full border border-ml-yellow"></span>
+            </button>
+            <button class="hover:text-black transition-colors">
+                <i class="ph ph-shopping-cart text-2xl"></i>
+            </button>
+        </div>
     </header>
 
-    <!-- 3. CAPA ESPACIAL (Puntos de Interacción / Hotspots) -->
-    <!-- Elemento 1: Carpa -->
-    <div class="absolute top-[55%] left-[20%] md:left-[30%] z-10 flex flex-col items-center group cursor-pointer animate-float hotspot" data-id="carpa">
-        <div class="w-10 h-10 rounded-full bg-ml-yellow/80 backdrop-blur-md flex items-center justify-center border-2 border-white shadow-[0_0_15px_rgba(255,241,89,0.5)] transition-transform group-hover:scale-110">
-            <i class="ph-fill ph-tent text-ml-dark text-xl"></i>
-        </div>
-        <div class="mt-2 glass-panel px-3 py-1 rounded-lg text-sm font-semibold opacity-0 group-hover:opacity-100 transition-opacity translate-y-2 group-hover:translate-y-0 flex items-center gap-2">
-            <span>Carpa Térmica</span>
-            <span class="text-ml-yellow">$145.900</span>
-        </div>
-    </div>
-
-    <!-- Elemento 2: Botas -->
-    <div class="absolute top-[75%] left-[65%] md:left-[55%] z-10 flex flex-col items-center group cursor-pointer animate-float hotspot" style="animation-delay: 1s;" data-id="botas">
-        <div class="w-10 h-10 rounded-full bg-white/30 backdrop-blur-md flex items-center justify-center border-2 border-white shadow-[0_0_15px_rgba(255,255,255,0.3)] transition-transform group-hover:scale-110 group-hover:bg-ml-yellow/80 group-hover:border-ml-yellow">
-            <i class="ph-fill ph-boot text-white group-hover:text-ml-dark text-xl transition-colors"></i>
-        </div>
-        <div class="mt-2 glass-panel px-3 py-1 rounded-lg text-sm font-semibold opacity-0 group-hover:opacity-100 transition-opacity translate-y-2 group-hover:translate-y-0 flex items-center gap-2">
-            <span>Botas Trekking</span>
-            <span class="text-ml-yellow">$85.000</span>
-        </div>
-    </div>
-
-    <!-- Elemento 3: Arnés Perro -->
-    <div class="absolute top-[65%] left-[80%] md:left-[70%] z-10 flex flex-col items-center group cursor-pointer animate-float hotspot" style="animation-delay: 2s;" data-id="arnes">
-        <div class="w-10 h-10 rounded-full bg-white/30 backdrop-blur-md flex items-center justify-center border-2 border-white shadow-[0_0_15px_rgba(255,255,255,0.3)] transition-transform group-hover:scale-110 group-hover:bg-ml-yellow/80 group-hover:border-ml-yellow">
-            <i class="ph-fill ph-dog text-white group-hover:text-ml-dark text-xl transition-colors"></i>
-        </div>
-        <div class="mt-2 glass-panel px-3 py-1 rounded-lg text-sm font-semibold opacity-0 group-hover:opacity-100 transition-opacity translate-y-2 group-hover:translate-y-0 flex items-center gap-2">
-            <span>Arnés Táctico</span>
-            <span class="text-ml-yellow">$25.000</span>
-        </div>
-    </div>
-
-    <!-- 4. MODAL LÍQUIDO (Detalle del Producto) -->
-    <div id="product-modal" class="fixed inset-0 z-50 flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-500 p-4">
+    <!-- CONTENEDOR PRINCIPAL -->
+    <main class="relative w-full h-[calc(100vh-64px)] mt-16 overflow-hidden" id="bg-scene-container">
         
-        <!-- Botón Volver al Escenario -->
-        <button id="close-modal" class="absolute top-8 right-8 z-50 glass-panel rounded-full p-3 hover:bg-white/20 transition-colors flex items-center gap-2 group">
-            <i class="ph ph-x text-2xl group-hover:rotate-90 transition-transform"></i>
-            <span class="hidden md:inline pr-2 text-sm font-medium">Volver al entorno</span>
+        <!-- 2. ESCENARIO VIVO -->
+        <div id="bg-scene" class="absolute inset-[-5%] w-[110%] h-[110%] bg-cover bg-center object-cover" 
+             style="background-image: url('https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');">
+        </div>
+
+        <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-black/10 pointer-events-none"></div>
+        
+        <div class="absolute top-6 left-6 z-20 glass-panel text-white px-4 py-2 rounded-full text-sm font-medium flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-green-400 animate-pulse"></span>
+            Ecosistema: Camping en Patagonia
+        </div>
+
+        <!-- 3. CAPA ESPACIAL (Hotspots) -->
+        
+        <!-- Carpa (Abajo Izquierda) -->
+        <div class="absolute bottom-[35%] left-[15%] z-10 flex flex-col items-center group cursor-pointer animate-float hotspot" data-id="carpa">
+            <div class="w-14 h-14 rounded-full bg-ml-yellow/90 backdrop-blur-md flex items-center justify-center border-2 border-white shadow-[0_0_20px_rgba(255,230,0,0.6)] transition-transform duration-300 group-hover:scale-110">
+                <i class="ph-fill ph-tent text-ml-dark text-3xl"></i>
+            </div>
+            <div class="mt-3 glass-panel px-4 py-2 rounded-xl text-sm font-bold text-white opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-2 group-hover:translate-y-0 flex items-center gap-3">
+                <span>Carpa Glamping</span>
+                <span class="text-ml-yellow drop-shadow-md">$145.900</span>
+            </div>
+        </div>
+
+        <!-- Zapatillas (Centro Derecha) -->
+        <div class="absolute bottom-[25%] right-[30%] z-10 flex flex-col items-center group cursor-pointer animate-float hotspot" style="animation-delay: 1s;" data-id="botas">
+            <div class="w-14 h-14 rounded-full bg-white/50 backdrop-blur-md flex items-center justify-center border-2 border-white shadow-[0_0_15px_rgba(255,255,255,0.4)] transition-all duration-300 group-hover:scale-110 group-hover:bg-ml-yellow/90 group-hover:border-ml-yellow">
+                <i class="ph-fill ph-sneaker text-white group-hover:text-ml-dark text-3xl transition-colors"></i>
+            </div>
+            <div class="mt-3 glass-panel px-4 py-2 rounded-xl text-sm font-bold text-white opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-2 group-hover:translate-y-0 flex items-center gap-3">
+                <span>Salomon XT Pathway</span>
+                <span class="text-ml-yellow drop-shadow-md">$85.000</span>
+            </div>
+        </div>
+
+        <!-- Arnés (Medio Derecha Alta) -->
+        <div class="absolute top-[35%] right-[20%] z-10 flex flex-col items-center group cursor-pointer animate-float hotspot" style="animation-delay: 2s;" data-id="arnes">
+            <div class="w-14 h-14 rounded-full bg-white/50 backdrop-blur-md flex items-center justify-center border-2 border-white shadow-[0_0_15px_rgba(255,255,255,0.4)] transition-all duration-300 group-hover:scale-110 group-hover:bg-ml-yellow/90 group-hover:border-ml-yellow">
+                <i class="ph-fill ph-dog text-white group-hover:text-ml-dark text-3xl transition-colors"></i>
+            </div>
+            <div class="mt-3 glass-panel px-4 py-2 rounded-xl text-sm font-bold text-white opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-2 group-hover:translate-y-0 flex items-center gap-3">
+                <span>Arnés Táctico</span>
+                <span class="text-ml-yellow drop-shadow-md">$25.000</span>
+            </div>
+        </div>
+
+        <!-- 4. COMBO AVENTURA (Panel Inferior) -->
+        <div class="absolute bottom-6 left-1/2 transform -translate-x-1/2 w-11/12 max-w-2xl z-30 glass-combo rounded-2xl p-4 flex items-center justify-between transition-transform duration-500 hover:-translate-y-1" id="combo-panel">
+            <div class="flex items-center gap-4">
+                <!-- Stack de miniaturas -->
+                <div class="flex -space-x-3">
+                    <img src="./image_3.png" class="w-12 h-12 rounded-full border-2 border-white object-cover bg-white" alt="Carpa">
+                    <img src="./image.png" class="w-12 h-12 rounded-full border-2 border-white object-cover bg-white" alt="Zapatillas">
+                    <img src="./image_2.png" class="w-12 h-12 rounded-full border-2 border-white object-cover bg-white" alt="Arnés">
+                </div>
+                <div class="hidden sm:block">
+                    <h3 class="text-gray-800 font-bold leading-tight">Combo Aventura</h3>
+                    <p class="text-ml-green text-xs font-semibold">Lleva el escenario completo</p>
+                </div>
+            </div>
+            
+            <div class="flex items-center gap-6">
+                <div class="text-right">
+                    <p class="text-gray-400 line-through text-sm">$ 255.900</p>
+                    <p class="text-gray-900 font-bold text-xl">$ 219.900 <span class="text-ml-green text-sm font-bold">15% OFF</span></p>
+                </div>
+                <button class="bg-ml-blue hover:bg-blue-600 text-white font-semibold py-2 px-6 rounded-full transition-colors shadow-md flex items-center gap-2 whitespace-nowrap">
+                    Comprar combo
+                    <i class="ph-bold ph-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- 5. MODAL LÍQUIDO -->
+    <div id="product-modal" class="fixed inset-0 z-50 flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-500 p-4 mt-16">
+        
+        <button id="close-modal" class="absolute top-6 right-6 z-50 bg-black/50 text-white backdrop-blur-md border border-white/20 rounded-full p-3 hover:bg-black/70 transition-colors flex items-center gap-2 group shadow-lg">
+            <i class="ph ph-x text-xl group-hover:rotate-90 transition-transform"></i>
+            <span class="hidden md:inline pr-2 text-sm font-medium">Volver a la escena</span>
         </button>
 
-        <!-- Contenedor Principal del Producto -->
-        <div id="modal-content" class="glass-panel-dark w-full max-w-4xl rounded-3xl overflow-hidden flex flex-col md:flex-row transform scale-95 translate-y-10 transition-all duration-700 ease-out">
+        <div id="modal-content" class="glass-panel-dark w-full max-w-4xl rounded-2xl overflow-hidden flex flex-col md:flex-row transform scale-95 translate-y-10 transition-all duration-700 ease-out shadow-2xl">
             
-            <!-- Simulador de Visor 3D / Imagen -->
-            <div class="w-full md:w-1/2 h-64 md:h-[500px] relative bg-black/20 flex items-center justify-center p-8">
-                <div class="absolute top-4 left-4 glass-panel px-3 py-1 rounded-full flex items-center gap-2 text-xs">
-                    <span class="w-2 h-2 rounded-full bg-red-500 animate-pulse"></span>
-                    Vista 360°
+            <div class="w-full md:w-1/2 h-64 md:h-[450px] relative bg-white flex items-center justify-center p-8 border-r border-gray-100">
+                <div class="absolute top-4 left-4 bg-white/80 backdrop-blur-sm px-3 py-1 rounded-full flex items-center gap-2 text-xs font-semibold text-gray-700 shadow-sm border border-gray-200 z-10">
+                    <i class="ph ph-cube text-ml-blue"></i>
+                    Vista 3D
                 </div>
-                <img id="modal-img" src="" alt="Producto" class="w-full h-full object-contain drop-shadow-2xl transition-transform duration-700 hover:scale-110 cursor-grab">
+                <img id="modal-img" src="" alt="Producto" class="w-full h-full object-contain drop-shadow-xl transition-transform duration-700 hover:scale-105">
             </div>
 
-            <!-- Detalles y Compra -->
-            <div class="w-full md:w-1/2 p-8 md:p-10 flex flex-col justify-between">
+            <div class="w-full md:w-1/2 p-8 flex flex-col justify-between bg-white/95">
                 <div>
-                    <div class="flex items-center gap-2 text-ml-blue mb-3 text-sm font-semibold">
-                        <span>Llega mañana</span>
-                        <i class="ph-fill ph-lightning"></i>
-                        <span class="text-white/50 font-normal">FULL</span>
-                    </div>
-                    <h2 id="modal-title" class="text-2xl md:text-4xl font-bold leading-tight mb-2">Nombre del Producto</h2>
-                    <div class="flex items-baseline gap-3 mb-6">
-                        <span id="modal-price" class="text-3xl md:text-5xl font-light text-white"></span>
+                    <p class="text-xs text-gray-500 uppercase tracking-widest font-semibold mb-2" id="modal-category">Categoría</p>
+                    <h2 id="modal-title" class="text-2xl md:text-3xl font-bold text-gray-800 leading-tight mb-2">Nombre del Producto</h2>
+                    
+                    <div class="flex flex-col mb-4">
+                        <span id="modal-price" class="text-3xl md:text-4xl font-normal text-gray-900 tracking-tight"></span>
+                        <div class="flex items-center gap-1 text-ml-green mt-2 text-sm font-semibold">
+                            <i class="ph-fill ph-truck text-lg"></i>
+                            <span>Llega mañana</span>
+                            <span class="text-ml-green ml-1 italic font-bold">FULL</span>
+                        </div>
                     </div>
                     
-                    <p id="modal-desc" class="text-white/70 text-sm md:text-base leading-relaxed mb-6"></p>
-
-                    <div class="space-y-3">
-                        <h3 class="text-sm uppercase tracking-wider text-white/50 font-semibold">Especificaciones de la escena</h3>
-                        <ul id="modal-specs" class="space-y-2 text-sm">
-                            <!-- Las specs se inyectan por JS -->
-                        </ul>
-                    </div>
+                    <p id="modal-desc" class="text-gray-600 text-sm leading-relaxed mb-6"></p>
                 </div>
 
-                <div class="mt-8 flex flex-col gap-3">
-                    <button class="w-full bg-ml-blue hover:bg-blue-600 text-white font-semibold py-4 rounded-xl transition-colors shadow-lg shadow-blue-500/30 flex items-center justify-center gap-2">
+                <div class="mt-4 flex flex-col gap-3">
+                    <button class="w-full bg-ml-blue hover:bg-blue-600 text-white font-semibold py-3.5 rounded-lg transition-colors shadow-md flex items-center justify-center gap-2">
                         Comprar ahora
                     </button>
-                    <button class="w-full bg-ml-yellow hover:bg-yellow-400 text-ml-dark font-semibold py-4 rounded-xl transition-colors shadow-lg shadow-yellow-500/20 flex items-center justify-center gap-2">
-                        <i class="ph ph-shopping-cart text-xl"></i>
+                    <button class="w-full bg-blue-50 hover:bg-blue-100 text-ml-blue font-semibold py-3.5 rounded-lg transition-colors flex items-center justify-center gap-2">
                         Agregar al carrito
                     </button>
                 </div>
@@ -195,94 +256,67 @@
         </div>
     </div>
 
-    <!-- 5. LOGICA JAVASCRIPT -->
+    <!-- LÓGICA JAVASCRIPT -->
     <script>
-        // Base de datos simulada para los productos espaciales
+        // Integrando las imágenes locales provistas por el usuario
         const productsData = {
             'carpa': {
-                title: 'Carpa Doite Hi-Camper 4 Personas Montaña',
+                title: 'Carpa Glamping Familiar Verde Exterior',
                 price: '$ 145.900',
-                img: 'https://images.unsplash.com/photo-1534880606858-29b0e8a24e8d?q=80&w=800&auto=format&fit=crop&bg=transparent', // Unsplash tent
-                desc: 'Diseñada específicamente para soportar los fuertes vientos de la Patagonia. Estructura de duraluminio y columnas de agua de 5000mm. Retiene el 90% del calor corporal.',
-                specs: [
-                    '<i class="ph ph-wind text-ml-yellow"></i> Resistencia aerodinámica testeada',
-                    '<i class="ph ph-drop text-ml-yellow"></i> Impermeabilidad extrema',
-                    '<i class="ph ph-thermometer text-ml-yellow"></i> Aislamiento térmico -10°C'
-                ]
+                img: './image_3.png',
+                desc: 'Carpa espaciosa ideal para glamping. Cuenta con ventanas amplias para ventilación, base impermeable y espacio suficiente para sillas y colchones.',
+                category: 'Deportes y Fitness > Camping'
             },
             'botas': {
-                title: 'Botas Trekking Salomon X Ultra 4 Gore-Tex',
+                title: 'Zapatillas Salomon XT Pathway',
                 price: '$ 85.000',
-                img: 'https://images.unsplash.com/photo-1520639887900-47d34177d63d?q=80&w=800&auto=format&fit=crop',
-                desc: 'Agilidad de calzado de trail running con la estabilidad y el agarre necesarios para enfrentar terrenos técnicos. Membrana impermeable GORE-TEX para cruzar ríos patagónicos.',
-                specs: [
-                    '<i class="ph ph-mountains text-ml-yellow"></i> Suela All Terrain Contagrip®️',
-                    '<i class="ph ph-shield-check text-ml-yellow"></i> Advanced Chassis™️ para articulaciones',
-                    '<i class="ph ph-cloud-rain text-ml-yellow"></i> Membrana Gore-Tex 100% impermeable'
-                ]
+                img: './image.png',
+                desc: 'Zapatillas de trail running con diseño ligero y robusto. Sistema Quicklace para un ajuste perfecto y suela Contagrip para tracción en terrenos difíciles.',
+                category: 'Ropa y Accesorios > Calzado Deportivo'
             },
             'arnes': {
-                title: 'Arnés Táctico Ruffwear Web Master Para Perros',
+                title: 'Arnés Táctico Para Perro + Correa',
                 price: '$ 25.000',
-                img: 'https://images.unsplash.com/photo-1601646270631-f9ebc7e99732?q=80&w=800&auto=format&fit=crop',
-                desc: 'Seguridad y soporte para maniobrar y ayudar a tu perro a superar obstáculos. Ideal para senderismo exigente. Incluye agarre anatómico y zonas reflectantes.',
-                specs: [
-                    '<i class="ph ph-paw-print text-ml-yellow"></i> 5 puntos de ajuste ergonómico',
-                    '<i class="ph ph-hand-grabbing text-ml-yellow"></i> Asa acolchada para asistencia',
-                    '<i class="ph ph-moon-stars text-ml-yellow"></i> Tiras reflectantes para visibilidad nocturna'
-                ]
+                img: './image_2.png',
+                desc: 'Conjunto de arnés, collar táctico y correa elástica. Equipado con hebillas de metal resistente, sistema MOLLE y panel de gancho y bucle.',
+                category: 'Animales y Mascotas > Perros'
             }
         };
 
-        // Referencias a elementos del DOM
         const hotspots = document.querySelectorAll('.hotspot');
         const modal = document.getElementById('product-modal');
         const modalContent = document.getElementById('modal-content');
         const btnClose = document.getElementById('close-modal');
         const bgScene = document.getElementById('bg-scene');
-        const searchHeader = document.getElementById('search-header');
-        const ambientOverlay = document.getElementById('ambient-overlay');
+        const comboPanel = document.getElementById('combo-panel');
 
-        // Referencias a elementos del modal
         const modTitle = document.getElementById('modal-title');
         const modPrice = document.getElementById('modal-price');
         const modDesc = document.getElementById('modal-desc');
         const modImg = document.getElementById('modal-img');
-        const modSpecs = document.getElementById('modal-specs');
+        const modCategory = document.getElementById('modal-category');
 
-        // Función para abrir el modal (Efecto Líquido)
+        let isModalOpen = false;
+
         hotspots.forEach(spot => {
             spot.addEventListener('click', () => {
+                isModalOpen = true;
                 const id = spot.getAttribute('data-id');
                 const data = productsData[id];
 
-                // Llenar datos
                 modTitle.textContent = data.title;
                 modPrice.textContent = data.price;
                 modDesc.textContent = data.desc;
                 modImg.src = data.img;
+                modCategory.textContent = data.category;
                 
-                // Llenar specs
-                modSpecs.innerHTML = '';
-                data.specs.forEach(spec => {
-                    const li = document.createElement('li');
-                    li.className = 'flex items-center gap-2';
-                    li.innerHTML = spec;
-                    modSpecs.appendChild(li);
-                });
-
-                // Animar el entorno (Blur)
                 bgScene.classList.add('scene-blurred');
-                searchHeader.classList.add('opacity-0', '-translate-y-10', 'pointer-events-none');
-                ambientOverlay.classList.add('opacity-0');
+                comboPanel.classList.add('translate-y-32', 'opacity-0'); // Ocultar combo
                 
-                // Ocultar hotspots suavemente
                 hotspots.forEach(h => h.classList.add('opacity-0', 'pointer-events-none'));
 
-                // Mostrar Modal
                 modal.classList.remove('opacity-0', 'pointer-events-none');
                 
-                // Pequeño delay para la animación de entrada del contenido
                 setTimeout(() => {
                     modalContent.classList.remove('scale-95', 'translate-y-10');
                     modalContent.classList.add('scale-100', 'translate-y-0');
@@ -290,46 +324,54 @@
             });
         });
 
-        // Función para cerrar el modal y volver al escenario
         btnClose.addEventListener('click', () => {
-            // Animación de salida del contenido
+            isModalOpen = false;
+            
             modalContent.classList.remove('scale-100', 'translate-y-0');
             modalContent.classList.add('scale-95', 'translate-y-10');
 
-            // Ocultar modal
             setTimeout(() => {
                 modal.classList.add('opacity-0', 'pointer-events-none');
-            }, 300);
+            }, 400);
 
-            // Restaurar el entorno
             bgScene.classList.remove('scene-blurred');
-            searchHeader.classList.remove('opacity-0', '-translate-y-10', 'pointer-events-none');
-            ambientOverlay.classList.remove('opacity-0');
-
-            // Mostrar hotspots de nuevo
+            
+            // Restaurar hotspots y panel combo
             hotspots.forEach(h => {
                 h.classList.remove('opacity-0', 'pointer-events-none');
             });
+            comboPanel.classList.remove('translate-y-32', 'opacity-0');
         });
 
-        // Interacción extra: Efecto Parallax muy sutil con el movimiento del ratón para dar sensación de 3D
-        document.addEventListener('mousemove', (e) => {
-            // Solo si el modal NO está abierto
-            if(modal.classList.contains('opacity-0')) {
-                const x = (e.clientX / window.innerWidth - 0.5) * 20; // max 10px move
-                const y = (e.clientY / window.innerHeight - 0.5) * 20;
-                
-                bgScene.style.transform = `translate(${x}px, ${y}px) scale(1.02)`;
-                
-                hotspots.forEach((spot, index) => {
-                    // Diferente velocidad para crear profundidad
-                    const factor = index === 0 ? 1 : index === 1 ? -1.5 : 0.8;
-                    spot.style.transform = `translate(${x * factor}px, ${y * factor}px)`;
-                });
-            } else {
-                bgScene.style.transform = '';
-            }
+        const container = document.getElementById('bg-scene-container');
+        
+        container.addEventListener('mousemove', (e) => {
+            if (isModalOpen) return;
+
+            const rect = container.getBoundingClientRect();
+            const x = ((e.clientX - rect.left) / rect.width - 0.5) * 2;
+            const y = ((e.clientY - rect.top) / rect.height - 0.5) * 2;
+            
+            const moveX = x * -20;
+            const moveY = y * -20;
+            
+            bgScene.style.transform = `translate(${moveX}px, ${moveY}px) scale(1.05)`;
+            
+            hotspots.forEach((spot, index) => {
+                const factor = index === 0 ? 0.6 : index === 1 ? -0.5 : 0.4;
+                spot.style.transform = `translate(${moveX * factor}px, ${moveY * factor}px)`;
+            });
         });
+
+        container.addEventListener('mouseleave', () => {
+            if (isModalOpen) return;
+            bgScene.style.transform = `translate(0px, 0px) scale(1.05)`;
+            hotspots.forEach(spot => spot.style.transform = 'translate(0,0)');
+        });
+
+    </script>
+</body>
+</html>
 
     </script>
 </body>
